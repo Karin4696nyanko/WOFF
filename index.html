@@ -166,11 +166,11 @@
                 });
         }
 
-        function sendQRToWOFF() {
-            const qrResultElem = document.getElementById("qrResult");
+             function sendQRToWOFF() {
+            const qrResultElem =  new Html5QrcodeScanner("reader", { fps: 10, qrbox: 240 });//document.getElementById("qrResult");
             const messageContent = qrResultElem.textContent;
-            const html5QrcodeScanner = new Html5QrcodeScanner("qrResult", { fps: 10, qrbox: 240 });
-                html5QrcodeScanner.render(onScanSuccess);
+
+    
             woff.sendMessage({
                 content: messageContent
             })
