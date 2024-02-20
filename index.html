@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WOFF アプリ サンプル</title>
+    <title>WOFF アプリ</title>
     <script>
         // WOFF アプリ ID を設定する
-        const woffId = "https://woff.worksmobile.com/woff/ymrzqJ7BlrTHISfFEjdu2A";
+        const woffId = "ymrzqJ7BlrTHISfFEjdu2A";
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
@@ -17,7 +18,8 @@
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
+            /*font-family: 'Orbitron', sans-serif;*/
+            font-family: "Nico Moji",sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(45deg, #09c6f9, #045de9);
@@ -25,7 +27,7 @@
         }
 
         header {
-            background-color: #333;
+            background-color:#ff3d3dff;
             color: white;
             text-align: center;
             padding: 10px 0;
@@ -88,7 +90,7 @@
 <body>
 
     <header>
-        <h1>WOFF アプリ サンプル</h1>
+        <h1>WOFF アプリ </h1>
     </header>
 
     <div class="container">
@@ -99,7 +101,7 @@
             <div id="userProfileInfo"></div>
         </div>
 
-        <!-- 位置情報のセクション -->
+        <!-- 位置情報のセクション--> 
         <div class="section">
             <h2>位置情報の取得</h2>
             <p>Geolocation API で位置情報を取得します。</p>
@@ -158,7 +160,7 @@
         function scanQRCode() {
             woff.scanQR()
                 .then((result) => {
-                    document.getElementById("qrResult").innerHTML = "Scanned Info: " + result.value;
+                    document.getElementById("qrResult").innerHTML = result.value;
                     document.getElementById("sendQRDataBtn").style.display = "block";
                 })
                 .catch((err) => {
