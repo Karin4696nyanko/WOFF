@@ -7,7 +7,7 @@
     <title>WOFF アプリ サンプル</title>
     <script>
         // WOFF アプリ ID を設定する
-        const woffId = "ymrzqJ7BlrTHISfFEjdu2A";
+        const woffId = "https://woff.worksmobile.com/woff/ymrzqJ7BlrTHISfFEjdu2A";
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
@@ -166,11 +166,10 @@
                 });
         }
 
-             function sendQRToWOFF() {
+        function sendQRToWOFF() {
             const qrResultElem = document.getElementById("qrResult");
             const messageContent = qrResultElem.textContent;
 
-    
             woff.sendMessage({
                 content: messageContent
             })
