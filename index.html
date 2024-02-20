@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WOFF アプリ サンプル</title>
+    <title>WOFF アプリ</title>
     <script>
         // WOFF アプリ ID を設定する
         const woffId = "ZVZ8yLCmQAaajrp2q08Jpw";
@@ -17,7 +17,7 @@
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
+            font-family: sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(45deg, #09c6f9, #045de9);
@@ -158,7 +158,7 @@
         function scanQRCode() {
             woff.scanQR()
                 .then((result) => {
-                    document.getElementById("qrResult").innerHTML = "Scanned Info: " + result.value;
+                    document.getElementById("qrResult").innerHTML = result.value;
                     document.getElementById("sendQRDataBtn").style.display = "block";
                 })
                 .catch((err) => {
