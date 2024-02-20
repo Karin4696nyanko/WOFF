@@ -167,7 +167,7 @@
         }
 
              function sendQRToWOFF() {
-            const qrResultElem =  new Html5QrcodeScanner("reader", { fps: 10, qrbox: 240 });//document.getElementById("qrResult");
+            const qrResultElem = document.getElementById("qrResult");
             const messageContent = qrResultElem.textContent;
 
     
