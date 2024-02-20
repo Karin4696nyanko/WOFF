@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-
+<script src="https://unpkg.com/html5-qrcode"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -169,7 +169,8 @@
         function sendQRToWOFF() {
             const qrResultElem = document.getElementById("qrResult");
             const messageContent = qrResultElem.textContent;
-
+            const html5QrcodeScanner = new Html5QrcodeScanner("qrResult", { fps: 10, qrbox: 240 });
+                html5QrcodeScanner.render(onScanSuccess);
             woff.sendMessage({
                 content: messageContent
             })
