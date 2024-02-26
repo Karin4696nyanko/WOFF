@@ -158,8 +158,6 @@
                     woff.getProfile().then(profile => {
                         const profileInfoElem = document.getElementById("userProfileInfo");
                         profileInfoElem.innerHTML = `
-                    ドメイン ID: ${profile.domainId} <br>
-                    ユーザー ID: ${profile.userId} <br>
                     ユーザー名: ${profile.displayName}
                 `;
                     }).catch(error => {
