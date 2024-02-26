@@ -99,15 +99,7 @@
             <div id="userProfileInfo"></div>
         </div>
 
-        <!-- 位置情報のセクション -->
-        <div class="section">
-            <h2>位置情報の取得</h2>
-            <p>Geolocation API で位置情報を取得します。</p>
-            <button class="btn" id="getLocationBtn">位置情報を取得</button>
-            <div id="locationInfo"></div>
-            <button class="btn" id="sendLocationBtn">取得した位置情報を送信</button>
-        </div>
-
+      
         <!-- QRコードリーダーのセクション -->
         <div class="section">
             <h2>QRコードをスキャンする</h2>
@@ -126,34 +118,6 @@
     </div>
 
     <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                document.getElementById("locationInfo").innerHTML = "このブラウザはGeolocationをサポートしていません。";
-            }
-        }
-
-        function showPosition(position) {
-            document.getElementById("locationInfo").innerHTML = "Latitude: " + position.coords.latitude +
-                ", Longitude: " + position.coords.longitude;
-            document.getElementById("sendLocationBtn").style.display = "block";
-        }
-
-        function sendLocationToWOFF() {
-            const locationInfoElem = document.getElementById("locationInfo");
-            const messageContent = locationInfoElem.textContent;
-
-            woff.sendMessage({
-                content: messageContent
-            })
-                .then(() => {
-                    alert('Sent successfully');
-                })
-                .catch((err) => {
-                    alert('error: ' + err);
-                });
-        }
 
         function scanQRCode() {
             woff.scanQR()
@@ -206,8 +170,7 @@
                     console.log(err.code, err.message);
                 });
 
-            document.getElementById("getLocationBtn").addEventListener("click", getLocation);
-            document.getElementById("sendLocationBtn").addEventListener("click", sendLocationToWOFF);
+          
             document.getElementById("scanQRBtn").addEventListener("click", scanQRCode);
             document.getElementById("sendQRDataBtn").addEventListener("click", sendQRToWOFF);
         };
