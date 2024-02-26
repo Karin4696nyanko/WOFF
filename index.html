@@ -140,6 +140,7 @@
                 .then(() => {
                     alert('QRコードの情報を送信しました');
                     woff.closeWindow();
+                     function () {woff.closeWindow();});
                 })
                 .catch((err) => {
                     alert('error: ' + err);
