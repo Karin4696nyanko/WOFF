@@ -139,11 +139,12 @@
             })
                 .then(() => {
                     alert('QRコードの情報を送信しました');
+                    woff.closeWindow();
                 })
                 .catch((err) => {
                     alert('error: ' + err);
                 });
-                        woff.closeWindow();
+
         }
 
         document.getElementById("exitAppBtn").addEventListener("click", function () {
