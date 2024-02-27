@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
-
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WOFF アプリ サンプル</title>
+    
+    <title>WOFF アプリ</title>
     <script>
         // WOFF アプリ ID を設定する
-        
         const woffId = "SI3Bez6zOpOW4oMxlSx0Pg";
     </script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
@@ -18,7 +19,7 @@
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
+            font-family:sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(45deg, #09c6f9, #045de9);
@@ -89,17 +90,18 @@
 <body>
 
     <header>
-        <h1>WOFF アプリ サンプル</h1>
+        <h1>WOFF アプリ</h1>
     </header>
 
     <div class="container">
         <!-- ユーザープロフィール情報のセクション -->
         <div class="section" id="userProfileSection">
             <h2>ユーザーのプロフィール情報</h2>
-            <p>ログイン中のユーザーのプロフィール情報を取得して表示しています。</p>
+            <p> メソッドでログイン中のユーザーのプロフィール情報を取得して表示しています。</p>
             <div id="userProfileInfo"></div>
         </div>
 
+      
         <!-- QRコードリーダーのセクション -->
         <div class="section">
             <h2>QRコードをスキャンする</h2>
@@ -116,8 +118,54 @@
             <button class="btn" id="exitAppBtn">アプリを終了</button>
         </div>
     </div>
-
     <script>
+        
+
+        function sendQRToWOFF() {
+            const qrResultElem = document.getElementById("qrResult");
+            const messageContent = qrResultElem.textContent;
+
+            woff.sendMessage({
+                content: messageContent
+            })
+                .then(() => {
+                    alert('QRコードの情報を送信しました');
+                })
+                .catch((err) => {
+                    alert('error: ' + err);
+                });
+        }
+
+        document.getElementById("exitAppBtn").addEventListener("click", function () {
+            woff.closeWindow();
+        });
+
+        window.onload = function () {
+            woff
+                .init({
+                    woffId: woffId
+                })
+                .then(() => {
+                    woff.getProfile().then(profile => {
+                        const profileInfoElem = document.getElementById("userProfileInfo");
+                        profileInfoElem.innerHTML = `
+                    ドメイン ID: ${profile.domainId} <br>
+                    ユーザー ID: ${profile.userId} <br>
+                    ユーザー名: ${profile.displayName}
+                `;
+                    }).catch(error => {
+                        console.error('Profile error:', error);
+                    });
+                })
+                .catch((err) => {
+                    console.log(err.code, err.message);
+                });
+
+            document.getElementById("getLocationBtn").addEventListener("click", getLocation);
+            document.getElementById("sendLocationBtn").addEventListener("click", sendLocationToWOFF);
+            document.getElementById("scanQRBtn").addEventListener("click", scanQRCode);
+            document.getElementById("sendQRDataBtn").addEventListener("click", sendQRToWOFF);
+        };
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -157,54 +205,6 @@
                     alert('error: ' + err);
                 });
         }
-
-        function sendQRToWOFF() {
-            const qrResultElem = document.getElementById("qrResult");
-            const messageContent = qrResultElem.textContent;
-
-            woff.sendMessage({
-                content: messageContent
-            })
-                .then(() => {
-                    alert('QRコードの情報を送信しました');
-
-                    function(){woff.closeWindow();}
-                })
-                .catch((err) => {
-                    alert('error: ' + err);
-                });
-        }
-
-        document.getElementById("exitAppBtn").addEventListener("click", function () {
-            woff.closeWindow();
-        });
-
-        window.onload = function () {
-            woff
-                .init({
-                    woffId: woffId
-                })
-                .then(() => {
-                    woff.getProfile().then(profile => {
-                        const profileInfoElem = document.getElementById("userProfileInfo");
-                        profileInfoElem.innerHTML = `
-                    ドメイン ID: ${profile.domainId} <br>
-                    ユーザー ID: ${profile.userId} <br>
-                    ユーザー名: ${profile.displayName}
-                `;
-                    }).catch(error => {
-                        console.error('Profile error:', error);
-                    });
-                })
-                .catch((err) => {
-                    console.log(err.code, err.message);
-                });
-
-            document.getElementById("getLocationBtn").addEventListener("click", getLocation);
-            document.getElementById("sendLocationBtn").addEventListener("click", sendLocationToWOFF);
-            document.getElementById("scanQRBtn").addEventListener("click", scanQRCode);
-            document.getElementById("sendQRDataBtn").addEventListener("click", sendQRToWOFF);
-        };
     </script>
     <script charset="utf-8" src="https://static.worksmobile.net/static/wm/woff/edge/3.6/sdk.js"></script>
 </body>
